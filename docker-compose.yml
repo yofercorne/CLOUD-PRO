@@ -1,0 +1,69 @@
+version: '3'
+services:
+  usuarios:
+    build:
+      context: ./usuarios  # Directorio del microservicio de usuarios
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  services:
+    build:
+      context: ./services  # Directorio del microservicio de servicios
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  jobs:
+    build:
+      context: ./jobs  # Directorio del microservicio de trabajos
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  my-app:
+    build:
+      context: ./my-app  # Directorio de la aplicación frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Mauricio_nets4
+      MYSQL_DATABASE: perfilusuario  # Cambiar según sea necesario
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
