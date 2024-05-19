@@ -11,10 +11,10 @@ app.use(bodyParser.json());
 
 // Conexión a MySQL
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "75.101.252.245:3306",
     user: "root",
-    password: "Mauricio_nets4",
-    database: "jobsDB"  // Cambia esto al nombre correcto de tu base de datos de trabajos
+    password: "facilito",
+    database: "db_jobs"  // Cambia esto al nombre correcto de tu base de datos de trabajos
 });
 
 db.connect(err => {
