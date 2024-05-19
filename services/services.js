@@ -11,9 +11,9 @@ app.use(bodyParser.json());
 
 // Conexión a MySQL
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "75.101.252.245:3306",
     user: "root",
-    password: "Mauricio_nets4",
+    password: "facilito",
     database: "db_services"  // Cambia esto al nombre correcto de tu base de datos de servicios
 });
 
